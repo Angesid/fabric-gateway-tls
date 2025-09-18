@@ -1,0 +1,20 @@
+{
+  "name": "fabric-gateway",
+  "version": "1.0.50",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "bun run --watch src/start.ts",
+    "start": "bun run src/start.ts"
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "^1.13.0",
+    "@hyperledger/fabric-gateway": "^1.7.1",
+    "elysia": "latest",
+    "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "@elysiajs/swagger": "^1.2.2",
+    "bun-types": "latest"
+  },
+  "module": "src/index.js"
+}

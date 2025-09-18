@@ -1,0 +1,48 @@
+import path from "path";
+import { Env } from "@lib/utils";
+// ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+// GLOBAL CONFIGURATIONS
+export const GLOBAL = {
+  env: Env.getString("NODE_ENV", "production"),
+  port: Env.getNumber("SERVER_PORT", 5000),
+};
+// _________________________
+// ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+// FABRIC PEER CONFIGURATIONS
+export const PEER = {
+  endpoint: Env.getString("PEER_ENDPOINT", "localhost:7051"),
+  alias: Env.getString("PEER_HOST_ALIAS", "peer0.org1.example.com"),
+  userId: Env.getString("PEER_USER_ID", "User1"),
+  orgId: Env.getString("PEER_ORG_ID", "org1"),
+  mspId: Env.getString("PEER_MSP_ID", "Org1MSP"),
+  peerOrg: Env.getString("PEER_ORG", "org1.example.com"),
+  peerOrgsPath: Env.getString(
+    "PEER_ORGS_PATH",
+    path.resolve(__dirname, "..", "organizations", "peerOrganizations")
+  ),
+};
+export const MSP_DIR_PATH = path.resolve(
+  PEER.peerOrgsPath,
+  PEER.peerOrg,
+  "users",
+  `${PEER.userId}@${PEER.peerOrg}`,
+  "msp"
+);
+export const KEY_DIR_PATH = path.resolve(MSP_DIR_PATH, "keystore");
+export const CERT_DIR_PATH = path.resolve(MSP_DIR_PATH, "signcerts");
+export const TLS_DIR_PATH = path.resolve(
+  PEER.peerOrgsPath,
+  PEER.peerOrg,
+  "peers",
+  PEER.alias,
+  "tls",
+  "ca.crt"
+);
+// _________________________
+// ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+// FABRIC CONTRACT CONFIGURATIONS
+export const CONTRACT = {
+  name: Env.getString("CONTRACT_NAME", "mycontract"),
+  channel: Env.getString("CONTRACT_CHANNEL", "mychannel"),
+};
+// _________________________

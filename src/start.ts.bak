@@ -1,0 +1,25 @@
+import { server } from "@setup";
+import { GLOBAL } from "@config";
+import gatewayRoutes from "@routes/gateway";
+
+// ===========================
+// ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+server
+  // ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+  // Route Injection [Gateway]
+  .group("/gateway", (app) => app.use(gatewayRoutes))
+  // _________________________
+  // ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+  // Start the Server
+  .listen(GLOBAL.port, () => {
+    server.decorator.logger.log(
+      "global",
+      `Gateway running on http://localhost:${GLOBAL.port}`
+    );
+    if (GLOBAL.env === "development")
+      server.decorator.logger.log(
+        "global",
+        `Scalar docs running on http://localhost:${GLOBAL.port}/docs`
+      );
+  });
+// _________________________
